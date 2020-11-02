@@ -1,0 +1,21 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+
+
+  <head>
+    <meta charset="utf-8">
+    <title>make friends</title> 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'mkfri/css/style.css' %}">
+  </head>
+
+
+  <body class="container">
+    <h1 class="display-4 text-primary mb-4">{{title}}</h1>
+    <p class="h5">{{msg}}</p>
+    <a href="{% url goto %}">{{goto}}</a>
+  </body>
+
+
+</html>
