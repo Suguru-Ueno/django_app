@@ -13,11 +13,16 @@
 
   <body class="container">
     <h1 class="display-4 text-primary mb-4">{{title}}</h1>
-    <p class="h5">{{msg}}</p>
-    <a href="{% url goto %}">{{goto}}</a>
-    <p>test</p>
-    <p>test</p>
-    <p>test</p>
+    <p class="h5 mt-4">{{msg|safe}}</p>
+    <form action="{% url 'index' %}" method="POST">
+      {% csrf_token %}
+      <table>
+        
+        <tr><td>{{ form.as_table }}</td>
+           <td><input type="submit" class="btn btn-primary my-2" value="送信"></td>
+        </tr>
+      </table>
+    </form>
   </body>
 
 
