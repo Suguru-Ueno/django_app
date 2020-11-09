@@ -14,7 +14,7 @@
   <body class="container">
     <h1 class="display-4 text-primary">{{title}}</h1>
     <p class="h5 mt-4">{{msg|safe}}</p>
-    <form action="{% url 'index' %}" method="post">
+    <!-- <form action="{% url 'index' %}" method="post">
       {% csrf_token %}
       <table>
         {{ form.as_p }}
@@ -22,7 +22,28 @@
            <td><input type="submit" class="btn btn-primary my-2" value="送信"></td>
         </tr>
       </table>
-    </form>
+    </form> -->
+    <table class="table">
+      <tr>
+        <th>ID</th>
+        <th>NAME</th>
+        <th>GENDER</th>
+        <th>MAIL</th>
+        <th>AGE</th>
+        <th>BIRTHDAY</th>
+      </tr>
+      {% for item in data %}
+      <tr>
+        <td>{{item.id}}</td>
+        <td>{{item.name}}</td>
+        <td>{% if item.gender == False %}male{% endif %}
+            {% if item.gender == True %}female{% endif %}</td>
+        <td>{{item.mail}}</td>
+        <td>{{item.age}}</td>
+        <td>{{item.birthday}}</td>
+      </tr>
+      {% endfor %}
+    </table>
   </body>
 
 
