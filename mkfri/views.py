@@ -26,10 +26,17 @@ from .models import Friend
 
 
 def index(request):
-  data = Friend.objects.all()
   params = {
     'title' : 'hello my friends',
     'msg' : 'they are my friends',
-    'data' : data,
+    'form' : HelloForm(),
+    'data' : [],
   }
+  if (request.method == 'POST'):
+    num = request.POST['id']
+    item = Friend.objects.get(id=num)
+    params['data'] = [item]
+    params['form'] = HelloForm(request.POST)
+  else:
+    params['data'] = Friend.objects.all()
   return render(request, 'mkfri/index.html', params)
