@@ -1,7 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views.generic import TemplateView
-from .forms import HelloForm
+from .forms import FriendForm,HelloForm
 from .models import Friend 
 
 # Create your views here.
@@ -26,17 +26,24 @@ from .models import Friend
 
 
 def index(request):
+  data = Friend.objects.all()
   params = {
     'title' : 'hello my friends',
     'msg' : 'they are my friends',
     'form' : HelloForm(),
-    'data' : [],
+    'data' : data,
   }
-  if (request.method == 'POST'):
-    num = request.POST['id']
-    item = Friend.objects.get(id=num)
-    params['data'] = [item]
-    params['form'] = HelloForm(request.POST)
-  else:
-    params['data'] = Friend.objects.all()
   return render(request, 'mkfri/index.html', params)
+   
+
+def create(request):
+  if (request.method == 'POST'):
+    obj = Friend()
+    friend = FriendForm(request.POST, instance = obj)
+    friend.save()
+    return redirect(to='/mkfri')
+  params = {
+    'title':'Hello',
+    'form':FriendForm(),
+  }
+  return render(request, 'mkfri/create.html', params)

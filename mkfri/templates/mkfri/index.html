@@ -14,10 +14,10 @@
   <body class="container">
     <h1 class="display-4 text-primary">{{title}}</h1>
     <p class="h5 mt-4">{{msg|safe}}</p>
-    <form action="{% url 'index' %}" method="post">
+    <!-- <form action="{% url 'index' %}" method="post">
       {% csrf_token %}
         {{ form }}
-       <input type="submit" class="btn btn-primary my-2" value="送信">
+       <input type="submit" class="btn btn-primary my-2" value="送信"> -->
     
     </form>
     <table class="table">
