@@ -19,7 +19,6 @@
         {{ form }}
        <input type="submit" class="btn btn-primary my-2" value="送信"> -->
     
-    </form>
     <table class="table">
       <tr>
         <th>ID</th>
@@ -38,6 +37,7 @@
         <td>{{item.mail}}</td>
         <td>{{item.age}}</td>
         <td>{{item.birthday}}</td>
+        <td><a href="{% url 'edit' item.id %}">Edit</a></td>
       </tr>
       {% endfor %}
     </table>

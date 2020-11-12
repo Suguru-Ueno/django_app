@@ -47,3 +47,17 @@ def create(request):
     'form':FriendForm(),
   }
   return render(request, 'mkfri/create.html', params)
+
+
+def edit(request, num):
+  obj = Friend.objects.get(id = num)
+  if (request.method == 'POST'):
+    friend = FriendForm(request.POST, instance=obj)
+    friend.save()
+    return redirect(to='/mkfri')
+  params ={
+    'title' : '友達の編集',
+    'id' : num,
+    'form' : FriendForm(instance=obj),
+  }
+  return render(request, 'mkfri/edit.html', params)
