@@ -14,10 +14,7 @@
   <body class="container">
     <h1 class="display-4 text-primary">{{title}}</h1>
     <p class="h5 mt-4">{{msg|safe}}</p>
-    <!-- <form action="{% url 'index' %}" method="post">
-      {% csrf_token %}
-        {{ form }}
-       <input type="submit" class="btn btn-primary my-2" value="送信"> -->
+    <p><a href="{% url 'create' %}">友人作成</a></p>
     
     <table class="table">
       <tr>
@@ -27,6 +24,8 @@
         <th>MAIL</th>
         <th>AGE</th>
         <th>BIRTHDAY</th>
+        <th>修正</th>
+        <th>削除</th>
       </tr>
       {% for item in data %}
       <tr>
@@ -38,6 +37,7 @@
         <td>{{item.age}}</td>
         <td>{{item.birthday}}</td>
         <td><a href="{% url 'edit' item.id %}">Edit</a></td>
+        <td><a href="{% url 'delete' item.id %}">Delete</a></td>
       </tr>
       {% endfor %}
     </table>

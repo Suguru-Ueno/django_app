@@ -61,3 +61,16 @@ def edit(request, num):
     'form' : FriendForm(instance=obj),
   }
   return render(request, 'mkfri/edit.html', params)
+
+def delete(request,num):
+  friend = Friend.objects.get(id=num)
+  if (request.method == 'POST'):
+    friend.delete()
+    return redirect(to='/mkfri')
+  params ={
+    'title' : '友達のデータを消去する',
+    'msg' : '本当に良いですか？',
+    'id' : num,
+    'obj' : friend
+  } 
+  return render(request, 'mkfri/delete.html', params)
