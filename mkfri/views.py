@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views.generic import TemplateView
-from .forms import FriendForm,HelloForm
+from .forms import FriendForm,HelloForm,FindForm
 from .models import Friend 
 
 # Create your views here.
@@ -26,12 +26,20 @@ from .models import Friend
 
 
 def index(request):
-  data = Friend.objects.all()
+  if (request.method == 'POST'):
+    form = FindForm(request.POST)
+    find = request.POST['find']
+    data = Friend.objects.filter(name=find)
+    msg = '検索結果数は' + str(data.count())
+  else:
+    msg = '友達の名前で検索するよ。'
+    form = FindForm()
+    data = Friend.objects.all()
   params = {
     'title' : 'hello my friends',
-    'msg' : 'they are my friends',
-    'form' : HelloForm(),
+    'msg' : msg,
     'data' : data,
+    'form' : form, 
   }
   return render(request, 'mkfri/index.html', params)
    

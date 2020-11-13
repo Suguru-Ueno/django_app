@@ -14,6 +14,13 @@
   <body class="container">
     <h1 class="display-4 text-primary">{{title}}</h1>
     <p class="h5 mt-4">{{msg|safe}}</p>
+    <form action="{% url 'index' %}" method="POST">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <tr><th><td>        
+        <input type="submit" class="btn btn-primary my-2" value="検索">    
+      </td></th></tr>
+    </form>
     <p><a href="{% url 'create' %}">友人作成</a></p>
     
     <table class="table">
