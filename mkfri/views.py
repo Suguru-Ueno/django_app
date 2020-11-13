@@ -29,7 +29,7 @@ def index(request):
   if (request.method == 'POST'):
     form = FindForm(request.POST)
     find = request.POST['find']
-    data = Friend.objects.filter(name=find)
+    data = Friend.objects.filter(name__icontains=find)
     msg = '検索結果数は' + str(data.count())
   else:
     msg = '友達の名前で検索するよ。'
