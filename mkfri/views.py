@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views.generic import TemplateView
+from django.core.paginator import Paginator
 from .forms import FriendForm,HelloForm,FindForm
 from .models import Friend 
 
@@ -25,20 +26,22 @@ from .models import Friend
   
 
 
-def index(request):
+def index(request, num = 1):
   if (request.method == 'POST'):
     form = FindForm(request.POST)
     find = request.POST['find']
     data = Friend.objects.filter(name__icontains=find)
+    page = Paginator(data, 5)
     msg = '検索結果数は' + str(data.count())
   else:
     msg = '友達の名前で検索するよ。'
     form = FindForm()
     data = Friend.objects.all()
+    page = Paginator(data, 5)
   params = {
     'title' : 'hello my friends',
     'msg' : msg,
-    'data' : data,
+    'data' : page.get_page(num),
     'form' : form, 
   }
   return render(request, 'mkfri/index.html', params)

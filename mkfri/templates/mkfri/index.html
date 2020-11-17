@@ -51,6 +51,23 @@
       </tr>
       {% endfor %}
     </table>
+    <ul class="pagination">
+      {% if data.has_previous %}
+      <li class="page-item"><a href=" {% url 'index' %}" class="page-link">&laquo; first</a></li>
+      <li class="page-item"><a href=" {% url 'index' %}{{data.previous_page_number}}" class="page-link">&laquo; prev</a></li>
+      {% else %}
+      <li class="page-item"><a class="page-link">&laquo; first</a></li>
+      <li class="page-item"><a class="page-link">&laquo; prev</a></li>
+      {% endif %}
+      <li class="page-item"><a class="page-link">{{data.number}}/{{data.paginator.num_pages}}</a></li>
+      {% if data.has_next %}
+      <li class="page-item"><a href=" {% url 'index' %}{{data.next_page_number}}" class="page-link">next &raquo;</a></li>
+      <li class="page-item"><a href=" {% url 'index' %}{{data.next_page_number}}{{data.paginator.num_pages}}" class="page-link">last &raquo;</a></li>
+      {% else %}
+      <li class="page-item"><a class="page-link">next &raquo;</a></li>
+      <li class="page-item"><a class="page-link">last &raquo;</a></li>
+      {% endif %}
+    </ul>
   </body>
 
 
