@@ -13,6 +13,9 @@
 
   <body class="container">
     <h1 class="display-4 text-primary">{{title}}</h1>
+    <p><a href="{% url 'index' %}">友人一覧</a></p>
+    <p><a href="{% url 'create' %}">友人作成</a></p>
+    <p><a href="{% url 'message' %}">message一覧</a></p>
     <form action="{% url 'create' %}" method="post">
       {% csrf_token %}
       <table class="table">

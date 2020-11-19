@@ -36,6 +36,7 @@
         <th>BIRTHDAY</th>
         <th>修正</th>
         <th>削除</th>
+        <th>メッセージ</th>
       </tr>
       {% for item in data %}
       <tr>
@@ -48,6 +49,10 @@
         <td>{{item.birthday}}</td>
         <td><a href="{% url 'edit' item.id %}">Edit</a></td>
         <td><a href="{% url 'delete' item.id %}">Delete</a></td>
+        <td><ul>{% for ob in item.message_set.all %}
+                      <li>{{ob.title}}</li>
+                {% endfor %}
+        </ul></td>
       </tr>
       {% endfor %}
     </table>

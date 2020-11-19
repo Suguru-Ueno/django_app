@@ -13,6 +13,9 @@
 
   <body class="container">
     <h1 class="display-4 text-primary">{{title}}</h1>
+    <p><a href="{% url 'index' %}">友人一覧</a></p>
+    <p><a href="{% url 'create' %}">友人作成</a></p>
+    <p><a href="{% url 'message' %}">message一覧</a></p>
     <p>※以下のレコードを削除します。</p>
     <p class="h5 mt-4">{{msg|safe}}</p>
     
@@ -26,20 +29,20 @@
       </tr>
       
       <tr>
-        <th>GENDER</th><td>{% if item.gender == False %}女性{% endif %}
-          {% if item.gender == True %}男性{% endif %}</td>
+        <th>GENDER</th><td>{% if obj.gender == False %}女性{% endif %}
+          {% if obj.gender == True %}男性{% endif %}</td>
       </tr>
 
       <tr>
-        <th>MAIL</th><td>{{item.mail}}</td>
+        <th>MAIL</th><td>{{obj.mail}}</td>
       </tr>
 
       <tr>
-        <th>AGE</th><td>{{item.age}}</td>
+        <th>AGE</th><td>{{obj.age}}</td>
       </tr>
 
       <tr>
-        <th>BIRTHDAY</th><td>{{item.birthday}}</td>
+        <th>BIRTHDAY</th><td>{{obj.birthday}}</td>
       </tr>
   
       <form action="{% url 'delete' id %}" method="post">

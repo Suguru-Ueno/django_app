@@ -18,7 +18,9 @@
       {{ form.as_p }}   
       <input type="submit" class="btn btn-primary my-2" value="検索">    
     </form>
-    
+    <p><a href="{% url 'index' %}">友人一覧</a></p>
+    <p><a href="{% url 'create' %}">友人作成</a></p>
+    <p><a href="{% url 'message' %}">message一覧</a></p>
     <table class="table">
       <tr>
         <th class="py-1">title</th>
