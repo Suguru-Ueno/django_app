@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+
+
+  <head>
+    <meta charset="utf-8">
+    <title>make friends</title> 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'mkfri/css/style.css' %}">
+  </head>
+
+
+  <body class="container">
+    <h1 class="display-4 text-primary">{{title}}</h1>
+    <form action="{% url 'message' %}" method="POST">
+      {% csrf_token %}
+      {{ form.as_p }}   
+      <input type="submit" class="btn btn-primary my-2" value="検索">    
+    </form>
+    
+    <table class="table">
+      <tr>
+        <th class="py-1">title</th>
+        <th class="py-1">name</th>
+        <th class="py-1">datetime</th>
+      </tr>
+      {% for item in data %}
+      <tr>
+        <td class="py-2">{{item.title}}</td>
+        <td class="py-2">{{item.friend.name}}</td>
+        <td class="py-2">{{item.put_date}}</td>
+      </tr>
+      {% endfor %}
+    </table>
+    
+    
+    
+    <ul class="pagination">
+      {% if data.has_previous %}
+      <li class="page-item"><a href=" {% url 'message' %}" class="page-link">&laquo; first</a></li>
+      <li class="page-item"><a href=" {% url 'message' %}{{data.previous_page_number}}" class="page-link">&laquo; prev</a></li>
+      {% else %}
+      <li class="page-item"><a class="page-link">&laquo; first</a></li>
+      <li class="page-item"><a class="page-link">&laquo; prev</a></li>
+      {% endif %}
+      <li class="page-item"><a class="page-link">{{data.number}}/{{data.paginator.num_pages}}</a></li>
+      {% if data.has_next %}
+      <li class="page-item"><a href=" {% url 'message' %}{{data.next_page_number}}" class="page-link">next &raquo;</a></li>
+      <li class="page-item"><a href=" {% url 'message' %}{{data.next_page_number}}{{data.paginator.num_pages}}" class="page-link">last &raquo;</a></li>
+      {% else %}
+      <li class="page-item"><a class="page-link">next &raquo;</a></li>
+      <li class="page-item"><a class="page-link">last &raquo;</a></li>
+      {% endif %}
+    </ul>
+  </body>
+
+
+</html>

@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views.generic import TemplateView
 from django.core.paginator import Paginator
-from .forms import FriendForm,HelloForm,FindForm
-from .models import Friend 
+from .forms import FriendForm,HelloForm,FindForm,MessageForm
+from .models import Friend , Message
 
 # Create your views here.
 
@@ -85,3 +85,17 @@ def delete(request,num):
     'obj' : friend
   } 
   return render(request, 'mkfri/delete.html', params)
+
+def message(request, page=1):
+  if (request.method == 'POST'):
+    obj = Message()
+    form = MessageForm(request.POST,instance=obj)
+    form.save()
+  data = Message.objects.all().reverse()
+  paginator = Paginator(data,5)
+  params = {
+    'title': 'Message一覧',
+    'form': MessageForm(),
+    'data': paginator.get_page(page),
+  }
+  return render(request, 'mkfri/message.html', params)
