@@ -19,4 +19,5 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('mkfri/', include('mkfri.urls')),
+    path('sns/', include('sns.urls')),
 ]
