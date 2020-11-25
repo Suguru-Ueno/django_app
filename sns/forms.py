@@ -46,6 +46,10 @@ class FriendsForm(forms.Form):
     self.fields['friends'] = forms.MultipleChoiceField(choices=[(item.user, item.user) for item in friends], widget=forms.CheckboxSelectMultiple(), initial=vals)
 
 #Group作成フォーム
+class CreateGroupForm(forms.Form):
+  group_name = forms.CharField(max_length=50, widget=forms.TextInput(attrs={'class':'form-control'}))
+
+#投稿フォーム
 class PostForm(forms.Form):
   content = forms.CharField(max_length=500, widget=forms.Textarea(attrs={'class':'form-control', 'row':2}))
 
