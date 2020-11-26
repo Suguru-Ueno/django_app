@@ -231,3 +231,36 @@ def share(request, share_id):
     'share':share,
   }
   return render(request, 'sns/share.html', params)
+
+#goodボタンの処理
+@login_required(login_url='/admin/login/')
+def goood(request, good_id):
+  #goodするMessageを取得
+  good_msg = Message.objects.get(id=good_id)
+  #自分がMessageにgoodした数を調べる
+  is_good = Good.objects.filter(owner=request.user).filter(message=good_msg).count()
+  #is_good > 0 ならば、既にgood済み
+  if is_good > 0:
+    messages.success(request, 'このメッセージは、既にgoodしました。')
+    return redirect(to='/sns')
+  #Messageのgood_countを1増やす
+  good_msg.good_count += 1
+  good_msg.save()
+  #Goodを作成し、設定して保存
+  good = Good()
+  good.owner = request.user
+  good.message = good_msg
+  good.save()
+  #メッセージを設定
+  messages.success(request, 'メッセージにgoodしました。')
+  return redirect(to='/sns')
+
+#以下で、viewに使用する関数を定義する
+
+#指定されたグループ及び検索文字によるMessageの取得
+def get_your_group_message(owner, glist, page):
+  page_num = 10 #1ページあたりの表示数
+  #publicの取得
+  (public_user, public_group) = get_public()
+  #チェックされたGroupの取得
+  
