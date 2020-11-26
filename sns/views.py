@@ -263,4 +263,24 @@ def get_your_group_message(owner, glist, page):
   #publicの取得
   (public_user, public_group) = get_public()
   #チェックされたGroupの取得
+  groups = Group.objects.filter(Q(owner=owner)|Q(owner=public_user)).filter(title__in=glist)
+  #Groupに含まれるFriendの取得
+  me_friens = Friend.objects.filter(group__in=groups)
+  #FriendのUserをリストにまとめる
+  me_users = []
+  for f in me_friens:
+    me_users.append(f.user)
+  #UserリストのUserが作ったGroupの取得
+  his_groups = Group.objects.filter(owner__in=me_users)
+  his_friends = Friend.objects.filter(user=owner).filter(group__in=his_groups)
+  me_groups = []
+  for hf in his_friends:
+    me_groups.append(hf.group)
+  #groupの中で、groupsまたはme_groupsに含まれているMessageの取得
+  messages = Message.objects.filter(Q(group__in=groups)|Q(group__in=me_groups))
+  #ページネーションで指定ページの取得
+  page_item = Paginator(messages, page_num)
+  return page_item.get_page(page)
+
+
   
