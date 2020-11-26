@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" crossorigin="anonymous">
+  </head>
+  <body class="container">
+    <nav class="navbar navbar-extend navbar-light bg-light">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item"><a href="{% url 'index' %}" class="nav-link">top</a></li>
+        <li class="nav-item"><a href="{% url 'post' %}" class="nav-link">post</a></li>
+        <li class="nav-item"><a href="{% url 'groups' %}" class="nav-link">groups</a></li>
+      </ul>
+      <span>logined: <span class="h6">"{{login_user}}".</span></span>
+    </nav>
+    <div>{% block header %}{% endblock %}</div>
+    <div class="content">{% block content %}{% endblock %}</div>
+
+    <hr>
+
+    <div class="my-3">
+      <span class="font-weight-bold"><a href="/admin/logout?next=/sns/">[ logout ]</a></span>
+      <span class="flout-right">copyright 2020 sgr.</span>
+    </div>
+  </body>
+</html>
