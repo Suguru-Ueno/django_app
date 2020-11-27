@@ -1,0 +1,23 @@
+{% extends 'sns/layout.html' %}
+
+{% block title %}Post{% endblock %}
+
+{% block header %}
+<h1 class="display-4 text-primary">Post</h1>
+<p class="caption">※投稿先のグループを選択し、メッセージを投稿します。</p>
+{% if messages %}
+<ul class="list-group">
+  {% for message in messages %}
+    <li{% if message %} class="list-group-item {{ message.tag }}"{% endif %}>{{ message }}</li>
+  {% endfor %}
+</ul>
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<form action="{% url 'post' %}" method="POST">
+  {% csrf_token %}
+  {{form.as_p}}
+  <button class="btn btn-primary">Post</button>
+</form>
+{% endblock %}
