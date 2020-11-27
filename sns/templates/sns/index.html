@@ -57,6 +57,7 @@
       <a href="{% url 'good' item.id %}"><button class="py-0">good</button></a>
     </span>
   </td></tr>
+  {% endfor %}
 </table>
 
 <ul class="pagination justify-content-center">
@@ -76,3 +77,4 @@
     <li class="page-item"><a class="page-link">last &raquo;</a></li>
     {% endif %}
 </ul>
+{% endblock %}

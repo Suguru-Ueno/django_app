@@ -53,7 +53,7 @@ def index(request, page=1):
 
 
 @login_required(login_url='/admin/login/')
-def group(request):
+def groups(request):
   #自分が登録したfriendsを取得
   friends = Friend.objects.filter(owner=request.user)
 
@@ -107,7 +107,7 @@ def group(request):
   else:
     #フォームの用意
     groupsform = GroupSelectForm(request.user)
-    friendsform = FriendsForm(request.user, friends=frieds, vals=[])
+    friendsform = FriendsForm(request.user, friends=friends, vals=[])
     sel_group = '-'
   
   #共通の処理
@@ -119,7 +119,7 @@ def group(request):
     'friend_form':friendsform,
     'group':sel_group,
   }
-  return render(request, 'sns/group.html', params)
+  return render(request, 'sns/groups.html', params)
 
 #Friendの追加処理
 @login_required(login_url='/admin/login/')
@@ -234,7 +234,7 @@ def share(request, share_id):
 
 #goodボタンの処理
 @login_required(login_url='/admin/login/')
-def goood(request, good_id):
+def good(request, good_id):
   #goodするMessageを取得
   good_msg = Message.objects.get(id=good_id)
   #自分がMessageにgoodした数を調べる
