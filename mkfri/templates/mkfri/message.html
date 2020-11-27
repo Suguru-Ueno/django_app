@@ -49,7 +49,7 @@
       <li class="page-item"><a class="page-link">{{data.number}}/{{data.paginator.num_pages}}</a></li>
       {% if data.has_next %}
       <li class="page-item"><a href=" {% url 'message' %}{{data.next_page_number}}" class="page-link">next &raquo;</a></li>
-      <li class="page-item"><a href=" {% url 'message' %}{{data.next_page_number}}{{data.paginator.num_pages}}" class="page-link">last &raquo;</a></li>
+      <li class="page-item"><a href=" {% url 'message' %}{{data.paginator.num_pages}}" class="page-link">last &raquo;</a></li>
       {% else %}
       <li class="page-item"><a class="page-link">next &raquo;</a></li>
       <li class="page-item"><a class="page-link">last &raquo;</a></li>
