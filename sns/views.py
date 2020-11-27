@@ -61,7 +61,7 @@ def groups(request):
   if request.method == 'POST':
 
     #Groupsメニューの選択肢の処理
-    if request.POST['mode'] == '__groups_form__': #ここは調べる
+    if request.POST['mode'] == '__groups_form__': 
       #選択したGroup名を取得
       sel_group = request.POST['groups']
       #Groupを取得
@@ -116,7 +116,7 @@ def groups(request):
     'login_user':request.user,
     'groups_form':groupsform,
     'create_form':createform,
-    'friend_form':friendsform,
+    'friends_form':friendsform,
     'group':sel_group,
   }
   return render(request, 'sns/groups.html', params)
@@ -143,6 +143,7 @@ def add(request):
   #Friendの登録処理
   frd = Friend()
   frd.owner = request.user
+  frd.user = add_user
   frd.group = public_group
   frd.save()
 
@@ -170,7 +171,7 @@ def post(request):
     gr_name = request.POST['groups']
     content = request.POST['content']
     #Groupの取得
-    group = Group.objects.filter(owner=request.user).filter(title=gr_name)
+    group = Group.objects.filter(owner=request.user).filter(title=gr_name).first()
     if group == None:
       (pub_user, group) = get_public()
     #Messageを作成し設定して保存

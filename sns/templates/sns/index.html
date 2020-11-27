@@ -16,8 +16,8 @@
 </p>
 {% if messages %}
 <ul class="messages">
-  {% for mmessage in messages %}
-  <li{% if message.tag %} class="{{ message.tag }}"{% endif %}>{{message}}</li>
+  {% for message in messages %}
+  <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{message}}</li>
   {% endfor %}
 </ul>
 {% endif %}
@@ -43,10 +43,12 @@
     <p class="my-0">
       {% if item.group.title == 'public' %}
       <span class="bg-info text-light px-1">Public</span>
+      {% else %}
+      <span class="bg-info text-light px-1">{{ item.group.title }}</span>
       {% endif %}
       {{ item.content }}
     </p>
-    <p>({{ item.pub_date }})</p>
+    <p>({{ item.put_date }})</p>
     {% if item.share_id > 0 %}
     <ul><li class="text-black-50">{{item.get_share}}</li></ul>
     {% endif %}
